@@ -1,7 +1,6 @@
 <html>
 <?php
 if (isset($this->session->userdata['logged_in'])) {
-	header("location: http://localhost/login/index.php/project_controller/enter_hours");
 }
 ?>
 <head>
@@ -16,7 +15,7 @@ if (isset($this->session->userdata['logged_in'])) {
 			echo "<div class='error_msg'>";
 			echo validation_errors();
 			echo "</div>";
-			echo form_open('project_controller/enter_hours');
+			echo form_open('http://localhost/5448-CI/index.php/project_controller/enter_hours');
 
 			echo form_label('Enter hours worked: ');
 			echo"<br/>";

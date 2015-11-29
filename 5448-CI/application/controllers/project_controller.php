@@ -40,7 +40,7 @@ Class Project_Controller extends CI_Controller {
 		//Trim - strip whitespace from beginning/end of string
 		//Numeric - 
 		$this->form_validation->set_rules('hours', 'Hours', 'trim|numeric|required');
-		$this->form_validation->set_rules('project_note', 'Notes', 'trim');
+		$this->form_validation->set_rules('project_notes', 'Notes', 'trim');
 
 		if ($this->form_validation->run() == FALSE) 
 		{
@@ -49,9 +49,9 @@ Class Project_Controller extends CI_Controller {
 		else 
 		{
 			$data = array(
+				'user_name' => ($this->session->userdata['username']),
 				'project_hours' => $this->input->post('hours'),
-				'project_note' => $this->input->post('project_note'),
-				'creation_time' => $this->input->post(values(CURRENT_TIMESTAMP))
+				'project_note' => $this->input->post('project_notes'),
 				);
 			$result = $this->project_database->hours_insert($data);
 			//Check if succesfully inserted into db
@@ -69,7 +69,15 @@ Class Project_Controller extends CI_Controller {
 	}
 
 	public function enter_hours_run(){
-		$this->load->view('enter_hours_form');
+
+		if(isset($this->session->userdata['logged_in']))
+			{
+				$this->load->view('enter_hours_form');
+			}
+			else
+			{
+				$this->load->view('login_form');
+			}
 	}
 }
 ?>
