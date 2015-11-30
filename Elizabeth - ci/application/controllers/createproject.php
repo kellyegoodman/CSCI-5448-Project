@@ -11,6 +11,8 @@ class CreateProject extends CI_Controller {
 
 		//Load form validation library
 		$this->load->library('form_validation');
+
+		$this->load->model('Project_Database');
 	}
 
 	// shows the create project page
@@ -50,7 +52,7 @@ class CreateProject extends CI_Controller {
 				'time' => $this->input->post('time'),
 				'note' => $this->input->post('note'),
 				);
-			$result = $this->login_database->registration_insert($data);
+			$result = $this->Project_Database->create_project_insert($data);
 			//Check if succesfully inserted into db
 			if ($result == TRUE) 
 			{

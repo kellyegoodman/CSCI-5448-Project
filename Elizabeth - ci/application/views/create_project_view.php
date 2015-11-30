@@ -69,7 +69,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </head>
 <body>
 
-<?php echo form_open('createproject'); ?>
+<?php echo form_open('createproject\new_project'); ?>
 
 <div id="container">
 	<center><h1>Create Project</h1></center>

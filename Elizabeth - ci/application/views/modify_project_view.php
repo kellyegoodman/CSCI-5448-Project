@@ -69,6 +69,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </head>
 <body>
 
+<?php echo form_open('modifyproject'); ?>
+
 <div id="container">
 	<center><h1>Modify Project</h1></center>
 
