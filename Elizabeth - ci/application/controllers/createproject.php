@@ -38,7 +38,31 @@ class CreateProject extends CI_Controller {
 		}
 		else
 		{
-			$this->load->view('formsuccess');
+			$data = array(
+				'email' => $this->input->post('email'),
+				'name' => $this->input->post('name'),
+				'owner' => $this->input->post('owner'),
+				'num_users' => $this->input->post('num_users'),
+				'deadline' => $this->input->post('deadline'),
+				'status' => $this->input->post('status'),
+				'hours' => $this->input->post('hours'),
+				'priority' => $this->input->post('priority'),
+				'time' => $this->input->post('time'),
+				'note' => $this->input->post('note'),
+				);
+			$result = $this->login_database->registration_insert($data);
+			//Check if succesfully inserted into db
+			if ($result == TRUE) 
+			{
+				$data['message_display'] = 'Successfully registered!';
+				$this->load->view('view_project_view', $data);
+			} 
+			else 
+			{
+				$data['message_display'] = '';
+				$this->load->view('create_project_view', $data);
+			}
+			// $this->load->view('formsuccess');
 		}
 	}
 }
