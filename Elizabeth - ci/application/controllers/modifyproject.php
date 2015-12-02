@@ -11,56 +11,53 @@ class ModifyProject extends CI_Controller {
 
 		//Load form validation library
 		$this->load->library('form_validation');
+
+		//Load database
+		$this->load->model('Project_model');
 	}
 
 	public function index()
 	{
-		$this->load->view('modify_project_view');
+		$this->data['data'] = $this->Project_model->getProjectDetails();
+		$this->load->view('modify_project_view', $this->data);
 	}
 
 	// validate and store project information in database
 	public function new_project() {
-		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
-		$this->form_validation->set_rules('name', 'Name', 'trim|required');
-		$this->form_validation->set_rules('owner', 'Owner', 'trim|required');
-		$this->form_validation->set_rules('num_users', 'Number of Users', 'trim|required|integer');
+		$this->form_validation->set_rules('name', 'Project Name', 'trim|required');
+		//$this->form_validation->set_rules('owner', 'Owner', 'trim|required|integer');
 		$this->form_validation->set_rules('deadline', 'Deadline', 'trim|required');
 		$this->form_validation->set_rules('status', 'Status', 'trim|required');
 		$this->form_validation->set_rules('hours', 'Hours', 'trim|required');
 		$this->form_validation->set_rules('priority', 'Priority', 'trim|required');
-		$this->form_validation->set_rules('time', 'Time', 'trim|required');
-		$this->form_validation->set_rules('note', 'Note', 'trim|required');
+		$this->form_validation->set_rules('time', 'Date Created', 'trim|required');
 
-		//If validation fails, reload the form
-		if ($this->form_validation->run() == FALSE) {
-			$this->load->view('create_project_view');
-		}
-		else
+		//deleted from checking
+		$data = array(
+			'name' => $this->input->post('name'),
+			'owner_id' => $this->input->post('owner'),
+			'deadline' => $this->input->post('deadline'),
+			'status' => $this->input->post('status'),
+			//'hours' => $this->input->post('hours'), needs seprate query
+			'priority' => $this->input->post('priority'),
+			'creation_date' => $this->input->post('time'),
+			'note' => $this->input->post('note'),
+			);
+		$result = $this->Project_model->update_entry($data);
+		//Check if succesfully inserted into db
+		if ($result == TRUE) 
 		{
-			$data = array(
-				'email' => $this->input->post('email'),
-				'name' => $this->input->post('name'),
-				'owner' => $this->input->post('owner'),
-				'num_users' => $this->input->post('num_users'),
-				'deadline' => $this->input->post('deadline'),
-				'status' => $this->input->post('status'),
-				'hours' => $this->input->post('hours'),
-				'priority' => $this->input->post('priority'),
-				'time' => $this->input->post('time'),
-				'note' => $this->input->post('note'),
-				);
-			$result = $this->login_database->registration_insert($data);
-			//Check if succesfully inserted into db
-			if ($result == TRUE) 
-			{
-				$data['message_display'] = 'Successfully registered!';
-				$this->load->view('view_project_view', $data);
-			} 
-			else 
-			{
-				$data['message_display'] = '';
-				$this->load->view('create_project_view', $data);
-			}
+			$data['message_display'] = 'Successfully registered!';
+			echo "inserted!"; exit();
+			//$this->load->view('view_project_view', $data);
+		} 
+		else 
+		{
+			echo "Not inserted!"; exit();
+			echo "Errors";
+			//$data['message_display'] = '';
+			//$this->load->view('create_project_view', $data);
 		}
+		// $this->load->view('formsuccess');
 	}
 }

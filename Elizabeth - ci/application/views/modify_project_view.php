@@ -69,31 +69,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </head>
 <body>
 
-<?php echo form_open('modifyproject'); ?>
+<?php 
+$att=array('class'=>'dark-matter');
+echo form_open('modifyproject/new_project/',$att); ?>
 
 <div id="container">
 	<center><h1>Modify Project</h1></center>
 
 	<div id="body">
-		<!-- <form action="demo_form.asp"> -->
-			Email Address: <input type="text" name="email" value=""><br>
-			Name: <input type="text" name="name" value=""><br>
-			Owner: <input type="text" name="owner" value=""><br>
-			Number of Users: <input type="number" name="num_users" value=""><br>
-			Deadline: <input type="date" name="deadline" value=""><br>
-			Status: <input type="radio" name="status" value="hasn'tstarted"> Hasn't Started
-			<input type="radio" name="status" value="inprogress"> In Progress
-			<input type="radio" name="status" value="complete"> Complete <br>
-			<!-- Status: <input type="text" name="Status" value=""><br> -->
-			Hours: <input type="number" name="hours" value=""><br>
-			Priority: <input type="radio" name="priority" value="normal"> Normal
-			<input type="radio" name="priority" value="low"> Low
-			<input type="radio" name="priority" value="high"> High <br>
-			<!-- <input type="text" name="Priority" value=""><br> -->
-			Creation Time: <input type="text" name="time" value=""><br>
-			Note: <input type="text" name="note" value=""><br>
-			<input type="submit" value="Submit">
-		<!-- </form>		 -->
+		Project Name: <input type="text" name="name" value="<?php echo $data->name ?>"><br>		
+		Deadline: <input type="date" name="deadline" value="<?php echo $data->deadline ?>"><br>
+		Status: <input type="radio" name="status" value="active"> Active
+		<input type="radio" name="status" value="inactive"> Inactive<br>
+		Hours: <input type="number" name="hours" value="0"><br>
+		Priority: <input type="radio" name="priority" value="normal"> Normal
+		<input type="radio" name="priority" value="low"> Low
+		<input type="radio" name="priority" value="high"> High <br>
+		Date Created: <input type="date" name="date" value="<?php echo $data->creation_date ?>"><br>
+		Description: <input type="text" name="note" value="<?php echo $data->note ?>"><br>
+		<?php
+		echo form_submit('submit', 'Submit');
+		echo form_close();
+		?>
 	</div>
 </div>
 

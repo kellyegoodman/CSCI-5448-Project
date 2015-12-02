@@ -64,6 +64,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		box-shadow: 0 0 8px #D0D0D0;
 		text-align: center;
 	}
+
+	#left {
+	    float:left;
+	    width:100px;
+	}
+
+	#center {
+	    display: inline-block;
+	    margin:0 auto;
+	    width:100px;
+	}
+
+	#right {
+	    float:right;
+	    width:100px;
+	}
 	
 	</style>
 </head>
@@ -73,9 +89,52 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<center><h1>View Project</h1></center>
 
 	<div id="body">
+		<h3 style="float: center;">Project Description</h3>
+		<div id="left"><h4>Owner</h4></div>
+		<div id="right"><h4>Status</h4></div>
+		<div id="center"><h4>Deadline</h4></div>
+		
+		<center>This is where the table goes</center>
+		<?php
+			$tabledata = array(
+				array('Example Notes', '5', 'Dec. 1, 2015')
+				);
+			$this->table->set_heading('Logged Notes', 'Hours', 'Date');
+			echo $this->table->generate($tabledata);
+		?>
 
+		<!-- This will redirect to the Add Hours Page -->
+		<form>
+		    <input type="submit" formaction="" value="Add/Edit Hours"/>
+		</form>
+		<br>
+		<br>
+
+		<center>This is where the table goes</center>
+		<?php
+			$tabledata = array(
+				array('Elizabeth Lor (lored@colorado.edu)', '5', 'High')
+				);
+			$this->table->set_heading('Contributors', 'Hours', 'Priority');
+			echo $this->table->generate($tabledata);
+		?>
+		<form>
+			<!-- This will redirect to the Add Users Page -->
+		    <input type="submit" formaction="" value="Add Contributors"/>
+		    <!-- This will redirect to the Remove Users Page -->
+		    <input type="submit" formaction="" value="Remove Contributors"/>
+		</form>
 	</div>
 </div>
-
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
