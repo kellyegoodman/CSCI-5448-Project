@@ -41,7 +41,7 @@ if (isset($this->session->userdata['logged_in'])) {
 			<input type="text" name="username" id="name" placeholder="username"/><br /><br />
 			<label>Password:</label>
 			<input type="password" name="password" id="password" placeholder="**********"/><br/><br />
-			<input type="submit" value=" Login " name="submit"/><br />
+			<input type="submit" value=" Login " name="submit"/><br /><br />
 			<a href="<?php echo base_url() ?>index.php/login_controller/user_registration_show">Register New Account</a>
 			<?php echo form_close(); ?>
 		</div>

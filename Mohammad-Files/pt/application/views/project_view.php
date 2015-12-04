@@ -8,7 +8,7 @@ echo form_open('projects_controller/new_project',$att); ?>
 	<center><h1>Create Project</h1></center>
 	<div id="body">
 	<table align="center" width="80%" style="color:#ffffff;">
-		<tr><td align="right">*Project Name:</td><td ><input type=text" name="name"></td></tr>
+		<tr><td align="right">*Project Name:</td><td ><input type="text" name="name"></td></tr>
 		<tr><td align="right">Creation Date:</td><td><input type="date" disabled="true" name="creation_date" value="<?php echo date("m/d/Y");?>"></td></tr>
 		<tr><td align="right">*Deadline:</td><td><input id="datepicker1" type="date" name="deadline" value=""></td></tr>
 		<tr><td align="right">*Status:</td><td><input type="radio" name="status" value="inactive"> Inactive <input type="radio" checked name="status" value="active"> Active</td></tr>
@@ -69,6 +69,22 @@ elseif($task==2): ?>
 		<tr><td colspan="2"><?php echo $row->description;?></td></tr>
 		<tr><td colspan="2"><?php echo $row->note?></td></tr>
 	<?php endforeach; ?>
+	</table>
+	</div>
+</div>
+</div>
+<?php
+elseif($task==3):
+//modify project
+foreach ($query->result() as $row):
+echo form_open('projects_controller/enter_hours/'.$row->id.'/1',$att); $status="";?>
+<div id="container">
+	<center><h1>Enter Hours</h1></center>
+	<div id="body">
+	<table align="center" width="80%" style="color:#ffffff;">
+		<tr><td align="right">*Enter the project hours:</td><td ><input type="text" name="hours"></td></tr>
+		<tr><td></td><td><?php echo form_submit('', 'Save and Close');?></td></tr>
+		<?php echo form_close(); ?>
 	</table>
 	</div>
 </div>

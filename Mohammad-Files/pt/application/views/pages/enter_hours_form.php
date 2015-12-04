@@ -1,41 +1,18 @@
-<html>
 <?php
-if (isset($this->session->userdata['logged_in'])) {
-}
-?>
-<head>
-	<title>Enter Hours</title>
-</head>
-<body>
-	<div id="main">
-		<div id="enter_hours">
-			<h2>Enter Hours</h2>
-			<hr/>
-			<?php
-			echo "<div class='error_msg'>";
-			echo validation_errors();
-			echo "</div>";
-			echo form_open('http://localhost/5448-CI/index.php/project_controller/enter_hours');
-
-			echo form_label('Enter hours worked: ');
-			echo"<br/>";
-			echo form_input('hours');
-			echo "<div class='error_msg'>";
-			if (isset($message_display)) {
-				echo $message_display;
-			}
-			echo "</div>";
-			echo"<br/>";
-			echo form_label('Description/Notes: ');
-			echo"<br/>";
-			echo form_input('project_notes');
-			echo"<br/>";
-			echo"<br/>";
-			echo form_submit('submit', 'Save and close');
-			echo form_close();
-			?>
-			<a href="<?php echo base_url() ?>/index.php/project_controller/index ">Go back</a>
-		</div>
+defined('BASEPATH') OR exit('No direct script access allowed');
+$att=array('class'=>'dark-matter');
+//Enter Hours
+echo validation_errors();
+//foreach ($query->result() as $row) :
+echo form_open('projects_controller/enter_hours/'.$id,$att); ?>
+<div id="container">
+	<center><h1>Enter Hours</h1></center>
+	<div id="body">
+	<table align="center" width="80%" style="color:#ffffff;">
+		<tr><td align="right">*Update project hours:</td><td><input type="text" name="hours"></td></tr>
+		<tr><td></td><td><?php echo form_submit('', 'Save and Close');?></td></tr>
+		<?php echo form_close(); ?>
+	</table>
 	</div>
-</body>
-</html>
+</div>
+<?php //endforeach; ?>

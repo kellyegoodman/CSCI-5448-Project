@@ -12,11 +12,19 @@ if (isset($this->session->userdata['logged_in'])) {
 		<div id="login">
 			<h2>Registration Form</h2>
 			<hr/>
+			<?php $att=array('class'=>'dark-matter');?>
 			<?php
 			echo "<div class='error_msg'>";
 			echo validation_errors();
 			echo "</div>";
-			echo form_open('login_controller/new_user_registration');
+			echo "<div class='error_msg'>";
+			if (isset($message_display)) {
+				echo $message_display;
+			}
+			echo "</div>";
+			echo"<br/>";
+
+			echo form_open('login_controller/new_user_registration', $att);
 
 			echo form_label('Your name: ');
 			echo"<br/>";
@@ -26,11 +34,7 @@ if (isset($this->session->userdata['logged_in'])) {
 			echo form_label('Create Username: ');
 			echo"<br/>";
 			echo form_input('username');
-			echo "<div class='error_msg'>";
-			if (isset($message_display)) {
-				echo $message_display;
-			}
-			echo "</div>";
+			echo"<br/>";
 			echo"<br/>";
 			echo form_label('Email: ');
 			echo"<br/>";
@@ -50,7 +54,7 @@ if (isset($this->session->userdata['logged_in'])) {
 			echo form_submit('submit', 'Register');
 			echo form_close();
 			?>
-			<a href="<?php echo base_url() ?> ">Already have an account? Login</a>
+			<a href="index">Already have an account? Login</a>
 		</div>
 	</div>
 </body>

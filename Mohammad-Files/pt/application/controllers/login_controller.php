@@ -31,7 +31,16 @@ Class Login_Controller extends CI_Controller {
 
 	//Show registration page
 	public function user_registration_show() {
+		$this->load->view('header');
 		$this->load->view('pages/registration_form');
+		$this->load->view('footer');
+	}
+
+	public function login_form_show() {
+		//redirect('login_controller/index');
+		$this->load->view('header');
+		$this->load->view('pages/login_form');
+		$this->load->view('footer');
 	}
 
 	//Validate and store registration data in database
@@ -47,7 +56,12 @@ Class Login_Controller extends CI_Controller {
 
 		//If validation fails, reload the form
 		if ($this->form_validation->run() == FALSE) {
-			$this->load->view('pages/registration_form');
+			$this->user_registration_show();
+			//redirect('login_controller/user_registration_show');
+			//$this->load->view('pages/registration_form');
+			// $this->load->view('header');
+			// $this->load->view('pages/registration_form');
+			// $this->load->view('footer');
 		} 
 		else 
 		{
@@ -64,12 +78,22 @@ Class Login_Controller extends CI_Controller {
 			if ($result == TRUE) 
 			{
 				$data['message_display'] = 'Successfully registered!';
-				$this->load->view('pages/login_form', $data);
+				$this->login_form_show();
+				//redirect('pages/login_form');
+				//$this->load->view('pages/login_form', $data);
+				// $this->load->view('header');
+				// $this->load->view('pages/login_form');
+				// $this->load->view('footer');
 			} 
 			else 
 			{
 				$data['message_display'] = 'Username already exists!';
+				//$this->user_registration_show($data);
+				//redirect('login_controller/user_registration_show', $data);
+				//$this->load->view('pages/registration_form', $data);
+				$this->load->view('header');
 				$this->load->view('pages/registration_form', $data);
+				$this->load->view('footer');
 			}
 		}
 	}
@@ -82,30 +106,19 @@ Class Login_Controller extends CI_Controller {
 
 		if ($this->form_validation->run() == FALSE) {
 			//Validate user is logged in
-			if(isset($this->session->userdata['logged_in']))
+			if(isset($this->session->userdata))
 			{
-				//do the query
-		        $data['query']=$this->Projects_model->get_projects();
-		        //store projects, #pages
-		        $projects=$this->Projects_model->get_projects(TRUE)->num_rows();
-		        $this->session->set_userdata('projects', $projects);
-				if($this->session->userdata('project_page_size')==0)
-				{
-					$this->session->set_userdata('project_page_size', Projects_model::LIMIT);
-				}
-		        $pages=ceil($projects/$this->session->userdata('project_page_size'));
-		        $this->session->set_userdata('project_pages', $pages);
-		        
-		        //render
-		        $this->load->view('header',$data);
-		        $this->load->view('pages/projects_view',$data);
-		        $this->load->view('footer',$data);
+				
+				redirect('projects_controller/index');
 				//$this->load->view('pages/projects_view');
 				//echo form_open('project_controller/initilize');
 			}
 			else
 			{
-				$this->load->view('pages/login_form');
+				$this->login_form_show();
+				// $this->load->view('header');
+				// $this->load->view('pages/login_form');
+				// $this->load->view('footer');
 			}
 		} 
 		else 
@@ -124,26 +137,14 @@ Class Login_Controller extends CI_Controller {
 				if ($result != false) 
 				{
 					$session_data = array(
-						'username' => $result[0]->username,
-						'email' => $result[0]->email,
-						'logged_in' => TRUE
+						'user_name' => $result[0]->username,
+						'user_id' => $result[0]->id,
+						'user_last' => date('m/d/Y h:i:s a', time()),
 						);
 					//Add user data to the session
 					$this->session->set_userdata($session_data);
 					
-			        //do the query
-			        $data['query']=$this->Projects_model->get_projects();
-			        //store projects, #pages
-			        $this->session->set_userdata('name', $pages);
-			        $this->session->set_userdata('user_id', $pages);
-			        
-					//render
-			        $this->load->view('header',$data);
-			        $this->load->view('pages/projects_view',$data);
-			        $this->load->view('footer',$data);
-
-					//$this->load->view('pages/projects_view');
-					//echo form_open('project_controller/initilize');
+					redirect('projects_controller/index');
 				}
 			} 
 			else 
@@ -151,7 +152,10 @@ Class Login_Controller extends CI_Controller {
 				$data = array(
 					'error_message' => 'Invalid Username or Password'
 					);
+				//$this->login_form_show($data);
+				$this->load->view('header');
 				$this->load->view('pages/login_form', $data);
+				$this->load->view('footer');
 			}
 		}
 	}
@@ -163,11 +167,15 @@ Class Login_Controller extends CI_Controller {
 		$sess_array = array(
 			'user_name' => '',
 			'user_id' => '',
-			'user_last' => '',
+			'user_last' => ''
 			);
-		$this->session->unset_userdata('logged_in',$sess_array);
+		$this->session->unset_userdata($sess_array);
 		$data['message_display'] = 'Successfully logged out';
+		//$this->login_form_show($data);
+
+		$this->load->view('header');
 		$this->load->view('pages/login_form', $data);
+		$this->load->view('footer');
 	}
 
 }

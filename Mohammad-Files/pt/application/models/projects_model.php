@@ -98,4 +98,22 @@ class Projects_model extends CI_Model {
 			return FALSE;
 	}
 
+	public function hours_insert($id, $data)
+	{
+		$condition = ' `user_account_id` = '.$data['user_account_id'].' AND `project_id` = '.$id;
+
+		$this->db->set('hours', $data['hours']);
+		$this->db->where($condition);
+		$this->db->update('user_project');
+
+		if ($this->db->affected_rows() > 0) 
+		{
+			return true;
+		}
+		else 
+		{
+			return false;
+		}
+	}
+
 }
