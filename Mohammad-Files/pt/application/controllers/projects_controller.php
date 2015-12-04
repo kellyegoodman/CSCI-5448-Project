@@ -18,12 +18,18 @@ class Projects_controller extends CI_Controller
 	//just an example please delete or call 
 	//authentication controller after plugging the
 	//other files
+	
 	private function isSigned()
 	{
 		$this->session->set_userdata('user_name', 'Mohammad Alasmary');
 		$this->session->set_userdata('user_id', '1');
 		$this->session->set_userdata('user_last', date('m/d/Y h:i:s a', time()));
 		return TRUE;
+	}
+	
+	private function sign_out()
+	{
+		redirect('login_controller/logout');
 	}
 	
 	//only first time
@@ -217,7 +223,7 @@ class Projects_controller extends CI_Controller
 			$this->form_validation->set_rules('deadline', 'Deadline', 'trim|required');
 			if ($this->form_validation->run() == FALSE)
 			{
-				go back to the page
+				//go back to the page
 			}
 			else
 			{
@@ -277,6 +283,45 @@ class Projects_controller extends CI_Controller
 				$this->load->view('header');
 				$this->load->view('project_view',$data);
 				$this->load->view('footer');
+		}
+	}
+
+	//Enter hours in current project for current user
+	public function enter_hours($id) 
+	{
+
+		$query['id'] = $id;
+
+		//Check validation for user input in enter hours form
+		//Required - form cannot be empty
+		//Trim - strip whitespace from beginning/end of string
+		//Numeric - Has to be a number
+		$this->form_validation->set_rules('hours', 'Hours', 'trim|numeric|required');
+
+		if ($this->form_validation->run() == FALSE) 
+		{
+			$this->load->view('header');
+			$this->load->view('pages/enter_hours_form',$query);
+			$this->load->view('footer');
+		}
+		else 
+		{
+			$data = array(
+				'user_account_id' => $this->session->user_id,
+				'hours' => $this->input->post('hours'),
+				);
+			$result = $this->Projects_model->hours_insert($id, $data);
+			//Check if succesfully inserted into db
+			if ($result == TRUE) 
+			{
+				echo 'Hours entered!';
+				$this->index();
+			} 
+			else 
+			{
+				show_error('Invalid hours!');
+				//$this->load->view('enter_hours_form', $data);
+			}
 		}
 	}
 }
