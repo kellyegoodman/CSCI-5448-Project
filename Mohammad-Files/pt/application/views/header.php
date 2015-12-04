@@ -19,7 +19,8 @@
 				<div class="title">
 									<?php echo anchor('projects_controller/new_project/', 'New Project','class="_menu"') ; ?>
 									<?php echo anchor('projects_controller/index/', 'My Projects','class="_menu"') ; ?>
-									<a href='' class="_menu">Sign Out</a>
+									<?php echo anchor('login_controller/logout/', 'Logout','class="_menu"') ; ?>
+									
 									&nbsp;&nbsp;&nbsp;Welcome <?php echo $this->session->user_name;?>. &nbsp;&nbsp;&nbsp;
 									Last access was on <?php echo $this->session->user_last;?>.&nbsp;&nbsp;&nbsp;
 									&nbsp;
