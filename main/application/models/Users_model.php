@@ -35,7 +35,7 @@ class Users_model extends CI_Model {
         	$this -> db -> select('username');
         	$this -> db -> from('user_account');
         	$this -> db -> where('id', $id);
-        	$this -> db -> where('password', $password);
+        	$this -> db -> where('password', MD5($password));
         	$this -> db -> limit(1);
         	
         	$query = $this -> db -> get();
@@ -48,8 +48,9 @@ class Users_model extends CI_Model {
         
         // change user password
         function change_password($id) {
-	        $data['password']=md5($this->input->post('password'));
+	        $data['password']=md5($this->input->post('password_new'));
 	        $this->db->where('id', $id);
+	        $this->db->where('password', md5($this->input->post('password')));
 	        return $this->db->update('user_account', $data);
         }
         

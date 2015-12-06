@@ -15,7 +15,7 @@ if (empty($this->session->userdata['user_id'])) {
 			}
 			echo validation_errors();
 			echo "</div>";
-			echo "Username: " . $username . '<br/>';
+			echo "Username: " . $username . '<br/><br/><br/>';
 			echo '<label for="name">First and Last Name:</label><br/>' . form_input('name',set_value('name')) . '<br/><br/>';
 			echo '<label for="email">E-mail Address:</label><br/>' . form_input('email',set_value('email')) . '<br/><br/>';
 			

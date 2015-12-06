@@ -80,12 +80,10 @@ Class Register_Controller extends CI_Controller {
 	function verify_password($password) {
 		$sess = $this->session->userdata('user_id');
 		//query the database
-		$result = $this->Users_model->verify_password($sess['id'], $password);
-	
-		if($result) {
+		if($this->Users_model->verify_password($sess['id'], $password)) {
 			return TRUE;
 		} 
-		$this->form_validation->set_message('verify_password', 'Invalid username or password');
+		$this->form_validation->set_message('verify_password', 'Password is incorrect');
 		return FALSE;
 	}
 	

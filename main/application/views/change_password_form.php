@@ -10,7 +10,7 @@
 			echo '<label for="password_new_confirm">Confirm New Password:</label><br/>' . form_password('password_new_confirm','') . '<br/><br/>';
 				
 
-			echo form_submit('register_submit', 'Login');
+			echo form_submit('password_submit', 'Change Password');
 			echo form_close();
 			
 		?>
