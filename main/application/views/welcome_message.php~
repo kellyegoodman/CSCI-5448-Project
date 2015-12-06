@@ -1,0 +1,16 @@
+
+
+<div id="container">
+	<br/>
+	<!--
+	<h1>Welcome to my website!</h1>  
+  	-->
+  	
+	<div id="body">
+		<?php
+		//echo anchor('Register_user','Create Account') . '<br/><br/>';
+
+			
+		?>
+	</div>
+</div>
