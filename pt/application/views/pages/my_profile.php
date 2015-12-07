@@ -30,7 +30,7 @@ foreach ($query->result() as $row):?>
 			echo form_fieldset_close();
 			echo"<br/>";
 			
-			echo form_submit('submit', 'Update my Porfile');
+			echo form_submit('submit', 'Update my Profile');
 			
 			?><?php endforeach; ?>
 			<?php echo form_close();?>
