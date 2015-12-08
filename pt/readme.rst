@@ -5,8 +5,6 @@ A webbased application that tracks the hours employees work on specific projects
 organizational project tracker that is tailored for project contributors to be able to manage their
 individual time.
 
-
-
 Features
 =========
 1. Authentication process.
@@ -21,8 +19,6 @@ Features
 10. Link users with a project that you have created.
 11. Unlink users from a project that you have created.
 
-
-
 Requirements
 =============
 Codeigniter framework version 3.0
@@ -32,8 +28,8 @@ PHP version 5.3 or newer.
 
 Installation
 =============
-- put the project folder in your active project directory, like /www/ in wamp server.
-- turn on rewrite module.
+- put the project folder in your active project directory, e.g. /www/ in wamp server.
+- Verify that ModRewrite is enabled in the Apache server configurations and AllowOverride is set to All
 - Change the needed configuration in pt\application\config\
 - import the sql file from /pt/pt.sql in your mysql database
 
